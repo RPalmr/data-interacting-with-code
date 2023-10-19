@@ -1,8 +1,5 @@
 # pylint: disable=missing-docstring, C0103
 
-import sqlite3
-
-
 def directors_count(db):
     # Write a SQL query to count the number of directors in the database
     query = "SELECT COUNT(*) FROM directors"
@@ -13,6 +10,8 @@ def directors_count(db):
     if result:
         count = result[0]
         return count
+
+    return 0
 
 
 def directors_list(db):
@@ -27,7 +26,7 @@ def directors_list(db):
 
 
 def love_movies(db):
-    # Write an SQL query to select movies with the exact word "love" in their title, excluding "Cloverfield"
+    # SQL query select movies with the exact word "love" in their title, excluding "Cloverfield"
     query = """
         SELECT title
         FROM movies
@@ -52,9 +51,8 @@ def directors_named_like_count(db, name):
     result = db.fetchone()
 
     # Extract the count from the result and return it
-    if result:
-        count = result[0]
-        return count
+    count = result[0] if result else 0
+    return count
 
 def movies_longer_than(db, min_length):
     # return this list of all movies which are longer than a given duration,
